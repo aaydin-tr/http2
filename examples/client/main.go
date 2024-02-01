@@ -8,7 +8,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/dgrr/http2"
+	"github.com/aaydin-tr/http2"
 	"github.com/valyala/fasthttp"
 )
 

@@ -1,4 +1,4 @@
-module github.com/dgrr/http2
+module github.com/aaydin-tr/http2
 
 go 1.20
 

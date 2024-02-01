@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/dgrr/http2/benchmark/common"
+	"github.com/aaydin-tr/http2/benchmark/common"
 	"golang.org/x/net/http2"
 )
 
