@@ -25,6 +25,16 @@ const (
 	connStateClosed
 )
 
+func isClosed[T any](ch <-chan T) bool {
+	select {
+	case <-ch:
+		return true
+	default:
+	}
+
+	return false
+}
+
 type serverConn struct {
 	c net.Conn
 	h fasthttp.RequestHandler
@@ -165,7 +175,9 @@ func (sc *serverConn) handlePing(ping *Ping) {
 	ping.SetAck(true)
 	fr.SetBody(ping)
 
-	sc.writer <- fr
+	if !isClosed(sc.writer) {
+		sc.writer <- fr
+	}
 }
 
 func (sc *serverConn) writePing() {
@@ -176,7 +188,9 @@ func (sc *serverConn) writePing() {
 
 	fr.SetBody(ping)
 
-	sc.writer <- fr
+	if !isClosed(sc.writer) {
+		sc.writer <- fr
+	}
 }
 
 func (sc *serverConn) checkFrameWithStream(fr *FrameHeader) error {
@@ -519,7 +533,9 @@ func (sc *serverConn) writeReset(strm uint32, code ErrorCode) {
 
 	r.SetCode(code)
 
-	sc.writer <- fr
+	if !isClosed(sc.writer) {
+		sc.writer <- fr
+	}
 
 	if sc.debug {
 		sc.logger.Printf(
@@ -540,7 +556,9 @@ func (sc *serverConn) writeGoAway(strm uint32, code ErrorCode, message string) {
 
 	fr.SetBody(ga)
 
-	sc.writer <- fr
+	if !isClosed(sc.writer) {
+		sc.writer <- fr
+	}
 
 	if strm != 0 {
 		atomic.StoreUint32(&sc.closeRef, sc.lastID)
@@ -814,7 +832,9 @@ func (sc *serverConn) handleEndRequest(strm *Stream) {
 
 	fasthttpResponseHeaders(h, &sc.enc, &ctx.Response)
 
-	sc.writer <- fr
+	if !isClosed(sc.writer) {
+		sc.writer <- fr
+	}
 
 	if hasBody {
 		if ctx.Response.IsBodyStream() {
@@ -1019,7 +1039,9 @@ func (sc *serverConn) handleSettings(st *Settings) {
 
 	fr.SetBody(stRes)
 
-	sc.writer <- fr
+	if !isClosed(sc.writer) {
+		sc.writer <- fr
+	}
 }
 
 func fasthttpResponseHeaders(dst *Headers, hp *HPACK, res *fasthttp.Response) {
