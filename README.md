@@ -1,4 +1,4 @@
-> ⚠️ This package is use `https://github.com/diamondcdn/fasthttp-http2` for fix [OMG! it's panic](https://github.com/dgrr/http2/issues/58) and [DATA RACE](https://github.com/dgrr/http2/issues/59) bugs. The reason why i create this package is `https://github.com/diamondcdn/fasthttp-http2` no longer maintained but main package `https://github.com/dgrr/http2` got updated. So i create this package for fix bugs and update to latest version of main fork.
+> ⚠️ This package is use [fasthttp-http2](https://github.com/diamondcdn/fasthttp-http2) implementations for fix [OMG! it's panic](https://github.com/dgrr/http2/issues/58) and [DATA RACE](https://github.com/dgrr/http2/issues/59) bugs. The reason why i create this package is [fasthttp-http2](https://github.com/diamondcdn/fasthttp-http2) no longer maintained but main package [http2](https://github.com/dgrr/http2) got updated. So i create this package for fix bugs and update to latest version of main fork.
 
 
 # HTTP2
