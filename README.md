@@ -8,7 +8,7 @@ http2 is an implementation of HTTP/2 protocol for [fasthttp](https://github.com/
 ## Download
 
 ```bash
-go get github.com/aaydin-tr/http2@v0.3.5
+go get github.com/aaydin-tr/http2
 ```
 
 ## Help
